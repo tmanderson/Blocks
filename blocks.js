@@ -1,5 +1,7 @@
 (function(scope) {
 	var Blocks,
+		src_attr 	= 'data-src',
+		type_attr 	= 'data-type',
 		loading 	= [],
 		loaded 		= [],
 		queue 		= [],
@@ -8,8 +10,13 @@
 		watcher,
 		i;
 
-	function init() {
+	function init(spec) {
 		if(!document.getElementsByTagName || !document.body) setTimeout(init, 20);
+
+		if(spec){
+			if(spec.src_attr) src_attr = spec.src_attr;
+			if(spec.type_attr) type_attr = spec.type_attr;
+		}
 
 		loadBlocks();
 	}
@@ -19,8 +26,8 @@
 
 		for(var i = blocks.length; --i >= 0;) {
 			var block = blocks[i];
-			if(block.getAttribute('data-src')) {
-				loadBlock(block.getAttribute('data-src'), block, block.getAttribute('data-type'));
+			if(block.getAttribute(src_attr)) {
+				loadBlock(block.getAttribute(src_attr), block, block.getAttribute(type_attr));
 			}
 		}
 	}
@@ -33,8 +40,8 @@
 			if(xhr.readyState === 4) {
 				if(!/404/g.test(xhr.status)) {
 					if(!type || type === 'wrap') {
-						element.removeAttribute('data-src');
-						element.removeAttribute('data-type');
+						element.removeAttribute(src_attr);
+						element.removeAttribute(type_attr);
 						element.innerHTML = xhr.responseText;
 					} else {
 						var parent 	= element.parentNode,
@@ -47,7 +54,7 @@
 					}
 				}
 			}
-		}
+		};
 		xhr.send('?');
 	}
 
@@ -61,7 +68,7 @@
 
 	Blocks = {
 		init: init
-	}
+	};
 
 	scope.Blocks = Blocks;
 })(window);

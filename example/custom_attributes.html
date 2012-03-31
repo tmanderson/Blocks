@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <title>Fancy Blox : Custom Attributes</title>
+    <script src="../blocks.js"></script>
+    <script>
+        Blocks.init({
+        	src_attr: 'blocks-src',
+        	type_attr: 'blocks-type'
+        });
+    </script>
+</head>
+<body>
+    <div blocks-src="test.html">
+        This is displayed if the custom attributed block can't be replaced.
+    </div>
+</body>	
+</html>
