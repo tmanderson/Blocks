@@ -1,21 +1,17 @@
 (function(scope) {
 	var Blocks,
-		src_attr 	= 'data-src',
-		type_attr 	= 'data-type',
-		loading 	= [],
-		loaded 		= [],
-		queue 		= [],
 		interval 	= 200,
 		context 	= document,
+		options,
 		watcher,
 		i;
 
-	function init(spec) {
+	function init(options) {
 		if(!document.getElementsByTagName || !document.body) setTimeout(init, 20);
 
-		if(spec){
-			if(spec.src_attr) src_attr = spec.src_attr;
-			if(spec.type_attr) type_attr = spec.type_attr;
+		options = {
+			src_attr	: options.src_attr || 'data-src',
+			type_attr	: options.src_type || 'data-type'
 		}
 
 		loadBlocks();
@@ -27,7 +23,7 @@
 		for(var i = blocks.length; --i >= 0;) {
 			var block = blocks[i];
 			if(block.getAttribute(src_attr)) {
-				loadBlock(block.getAttribute(src_attr), block, block.getAttribute(type_attr));
+				loadBlock(block.getAttribute(options.src_attr), block, block.getAttribute(options.type_attr));
 			}
 		}
 	}
@@ -55,7 +51,7 @@
 				}
 			}
 		};
-		xhr.send('?');
+		xhr.send(null);
 	}
 
 	function watch(timer) {

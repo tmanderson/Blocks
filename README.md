@@ -20,7 +20,7 @@ The settings can be used with the data-type attribute:
     </div>
 
 Blocks also offers a **watch** feature, which will enable Blocks to load content in anytime there is a new blocks element added. Simply call the
-`Blocks.watch();`, which also takes an optional duration for DOM checks (defauts to 200ms). Use `Blocks.stop();` to stop watching for blocks.
+`Blocks.watch()`, which also takes an optional duration for DOM checks (defauts to 200ms). Use `Blocks.stop()` to stop watching for blocks.
 
 That's all there is to it!
 
